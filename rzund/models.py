@@ -10,6 +10,7 @@ class Person (models.Model):
   birth       = models.DateField (blank=True, null=True)
   death       = models.DateField (blank=True, null=True)
   biogram     = models.TextField (blank=True)
+ # photo       = models.ImageField (blank=True,upload_to='static')
 
   def __unicode__ (self):
     return ' '.join((self.firstname,self.lastname))
@@ -45,7 +46,7 @@ class Affiliation (models.Model):
   person       = models.ForeignKey (Person)
   organization = models.ForeignKey (Organization)
   tag          = models.ForeignKey (Tag)
-  start        = models.DateField ()
+  start        = models.DateField (blank=True, null=True)
   end          = models.DateField (blank=True, null=True)
 
   def __unicode__ (self):
@@ -55,9 +56,10 @@ class Affiliation (models.Model):
 
 class Event (models.Model):
 
-  start       = models.DateField ()
+  start       = models.DateField (blank=True, null=True)
   end         = models.DateField (blank=True, null=True)
-  description = models.TextField ()
+  name        = models.TextField ()
+  description = models.TextField (blank=True)
   persons     = models.ManyToManyField(Person) 
 
   def __unicode__ (self): 
