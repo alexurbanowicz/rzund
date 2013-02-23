@@ -11,6 +11,8 @@ class Person (models.Model):
   death       = models.DateField (blank=True, null=True)
   biogram     = models.TextField (blank=True)
  # photo       = models.ImageField (blank=True,upload_to='static')
+ # sex         = 
+
 
   def __unicode__ (self):
     return ' '.join((self.firstname,self.lastname))
