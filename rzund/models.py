@@ -4,34 +4,42 @@ from django.db import models
 
 class Person (models.Model):
 
-  firstname   = models.TextField (empty=False)
-  lastname    = models.TextField (empty=False)
-  middlenames = models.TextField (empty=True)
-  birth       = models.DateField ()
-  death       = models.DateField (empty=True)
-  biogram     = models.TextField ()
+  firstname   = models.TextField ()
+  lastname    = models.TextField ()
+  middlenames = models.TextField (blank=True)
+  birth       = models.DateField (blank=True)
+  death       = models.DateField (blank=True)
+  biogram     = models.TextField (blank=True)
+
 
 class Tag (models.Model):
-  class name = models.TextField() 
+  name = models.TextField() 
+
 
 class Organization (models.Model):
-  name = models.TextField (empty=False)
+  name = models.TextField ()
+
 
 class Affiliation (models.Model):
-  person       = models.ForignKeyField (Person)
+
+  person       = models.ForeignKey (Person)
   organization = models.ForeignKey (Organization)
-  tag          = models.ForignKeyField (Tag)
+  tag          = models.ForeignKey (Tag)
   start        = models.DateTimeField ()
-  end          = models.DateTimeField (empty=True)
+  end          = models.DateTimeField (blank=True)
+
 
 class Event (models.Model):
 
-  start = models.ManyToManyField(Person)
+  start       = models.DateField ()
+  end         = models.DateField (blank=True)
   description = models.TextField ()
+  persons     = models.ManyToManyField(Person) 
+
 
 class Source (models.Model):
 
   title =       models.TextField ()
-  description = models.TextField (empty=True)
-  url =         models.URLField (empty=True)
-  file =        models.FileField (upload_to='sources', empty=True)
+  description = models.TextField (blank=True)
+  url =         models.URLField (blank=True)
+  file =        models.FileField (upload_to='sources/%s', blank=True)
