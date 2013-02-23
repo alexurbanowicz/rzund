@@ -29,3 +29,9 @@ class Event (models.Model):
   start = models.ManyToManyField(Person)
   description = models.TextField ()
 
+class Source (models.Model):
+
+  title =       models.TextField ()
+  description = models.TextField (empty=True)
+  url =         models.URLField (empty=True)
+  file =        models.FileField (upload_to='sources', empty=True)
