@@ -11,10 +11,12 @@ def person (request, object_id):
 
   person = get_object_or_404 (Person, pk=object_id)
   affils = Affiliation.objects.filter(person__exact=person)
-
+  events = Event
   template = loader.get_template ("person.html")
-
   result = dict(person=person, affiliations=affils)
 
   return HTTPresponse (template.render(Context(result)))
+
   
+
+
